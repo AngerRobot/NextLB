@@ -1,0 +1,39 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+class TextField {
+private:
+    string text; 
+
+public:
+    TextField(const string& initialText) : text(initialText) {}
+
+    void InsertSubstring(const string& substring, int index) {
+        if (index < 0 || index > text.length()) {
+            cout << "Индекс вне диапазона." << endl;
+            return;
+        }
+        text.insert(index, substring); /
+    }
+
+    string ToString() const {
+        return text;
+    }
+};
+
+int main() {
+    TextField textField("Hello, World!");
+
+    cout << "Начальный текст: " << textField.ToString() << endl;
+    string substring;
+    int index;
+    cout << "Введите подстроку для вставки: ";
+    getline(cin, substring);
+    cout << "Введите индекс для вставки: ";
+    cin >> index;
+    textField.InsertSubstring(substring, index);
+    cout << "Текст после вставки: " << textField.ToString() << endl;
+
+    return 0;
+}
