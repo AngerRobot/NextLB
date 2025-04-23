@@ -1,0 +1,42 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+class StringManipulator {
+public:
+    static string Substring(const std::string& text, int start, int length) {
+        if (start < 0 || start >= text.length() || length < 0) {
+            return ""; 
+        }
+
+        if (start + length > text.length()) {
+            length = text.length() - start;
+        }
+
+        return text.substr(start, length); 
+    }
+};
+
+int main() {
+    string text;
+    int start, length;
+
+    
+    cout << "Введите текст: ";
+    getline(std::cin, text);
+
+    cout << "Введите начальный индекс: ";
+    cin >> start;
+    cout << "Введите длину подстроки: ";
+    cin >> length;
+
+    string substring = StringManipulator::Substring(text, start, length);
+
+    if (substring.empty()) {
+        cout << "Некорректные параметры для извлечения подстроки." << std::endl;
+    } else {
+        cout << "Извлеченная подстрока: " << substring << endl;
+    }
+
+    return 0;
+}
