@@ -1,0 +1,43 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <sstream>
+
+using namespace std;
+class TextSplitter {
+private:
+    string text; 
+    char delimiter;   
+
+public:
+    TextSplitter(const std::string& initialText, char delim) 
+        : text(initialText), delimiter(delim) {}
+
+    vector<string> Split() const {
+        vector<string> result;
+        string token;
+        istringstream tokenStream(text);
+
+        while (getline(tokenStream, token, delimiter)) {
+            result.push_back(token);
+        }
+
+        return result;
+    }
+
+    string ToString() const {
+        string result = "Текст: " + text + "\nРазделитель: " + delimiter + "\nПодстроки:\n";
+        for (const auto& substring : Split()) {
+            result += substring + "\n";
+        }
+        return result;
+    }
+};
+
+int main() {
+    TextSplitter splitter("apple,banana,cherry,dates", ',');
+
+    cout << splitter.ToString();
+
+    return 0;
+}
